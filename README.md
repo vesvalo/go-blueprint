@@ -8,7 +8,7 @@
 * Enjoy!
 
 ## Start application
-* Up services `dev-docker-compose-up`
+* Up services `make dev-docker-compose-up`
 * Apply migration `sql-migrate up -env="local"`
 * Start API Gateway on :8080 `./artifacts/bin gateway -c ./artifacts/configs/local.yaml -b :8080 -d`
 * Start MS on :8081 `./artifacts/bin daemon -c ./artifacts/configs/local.yaml -b :8081 -d`
