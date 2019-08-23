@@ -1,0 +1,12 @@
+protoc:
+  version: 3.7.0
+
+generate:
+  go_options:
+    import_path: github.com/Nerufa/blueprint
+
+  plugins:
+    - name: go
+      type: go
+      flags: plugins=grpc
+      output: generated

@@ -1,0 +1,7 @@
+type Query {
+    ms: MsQuery
+}
+
+type Mutation {
+    ms: MsMutation
+}

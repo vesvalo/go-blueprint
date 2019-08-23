@@ -1,0 +1,5 @@
+local:
+  dialect: postgres
+  datasource: postgres://blueprint:insecure@localhost:5567?sslmode=disable
+  dir: resources/migrations
+  table: migrations

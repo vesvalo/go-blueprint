@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  postgres:
+    image: "postgres:11-alpine"
+    restart: always
+    networks:
+      - default
+networks:
+  default:
+    name: blueprint-default
