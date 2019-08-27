@@ -3,7 +3,7 @@ package migrate
 import (
 	"database/sql"
 	"fmt"
-	global "github.com/Nerufa/blueprint/cmd"
+	global "github.com/Nerufa/go-blueprint/cmd"
 	_ "github.com/lib/pq"
 	"github.com/rubenv/sql-migrate"
 	"github.com/spf13/cobra"

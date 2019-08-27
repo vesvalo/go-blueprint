@@ -1,8 +1,8 @@
 package gateway
 
 import (
-	"github.com/Nerufa/blueprint/app/http"
-	"github.com/Nerufa/blueprint/cmd"
+	"github.com/Nerufa/go-blueprint/app/http"
+	"github.com/Nerufa/go-blueprint/cmd"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/spf13/cobra"
 )

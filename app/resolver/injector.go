@@ -3,7 +3,7 @@
 package resolver
 
 import (
-	"github.com/Nerufa/blueprint/generated/graphql"
+	"github.com/Nerufa/go-blueprint/generated/graphql"
 	"github.com/Nerufa/go-shared/entrypoint"
 	"github.com/Nerufa/go-shared/provider"
 	"github.com/google/wire"

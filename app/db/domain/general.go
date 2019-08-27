@@ -1,7 +1,7 @@
 package domain
 
 import (
-	graphql1 "github.com/Nerufa/blueprint/generated/graphql"
+	graphql1 "github.com/Nerufa/go-blueprint/generated/graphql"
 	"github.com/gurukami/typ/v2"
 	"github.com/jinzhu/gorm"
 	"strings"

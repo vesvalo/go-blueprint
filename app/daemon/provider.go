@@ -2,9 +2,9 @@ package daemon
 
 import (
 	"context"
-	"github.com/Nerufa/blueprint/app/db/domain"
-	"github.com/Nerufa/blueprint/app/db/repo"
-	"github.com/Nerufa/blueprint/app/db/trx"
+	"github.com/Nerufa/go-blueprint/app/db/domain"
+	"github.com/Nerufa/go-blueprint/app/db/repo"
+	"github.com/Nerufa/go-blueprint/app/db/trx"
 	"github.com/Nerufa/go-shared/config"
 	"github.com/Nerufa/go-shared/postgres"
 	"github.com/Nerufa/go-shared/provider"

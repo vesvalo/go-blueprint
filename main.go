@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Nerufa/blueprint/cmd/root"
+	"github.com/Nerufa/go-blueprint/cmd/root"
 )
 
 func main() {

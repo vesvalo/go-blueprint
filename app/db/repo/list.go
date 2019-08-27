@@ -2,8 +2,8 @@ package repo
 
 import (
 	"context"
-	"github.com/Nerufa/blueprint/app/db/domain"
-	"github.com/Nerufa/blueprint/app/db/trx"
+	"github.com/Nerufa/go-blueprint/app/db/domain"
+	"github.com/Nerufa/go-blueprint/app/db/trx"
 	"github.com/jinzhu/gorm"
 	"strings"
 )

@@ -6,8 +6,8 @@
 package daemon
 
 import (
-	"github.com/Nerufa/blueprint/app/db/repo"
-	"github.com/Nerufa/blueprint/app/db/trx"
+	"github.com/Nerufa/go-blueprint/app/db/repo"
+	"github.com/Nerufa/go-blueprint/app/db/trx"
 	"github.com/Nerufa/go-shared/config"
 	"github.com/Nerufa/go-shared/entrypoint"
 	"github.com/Nerufa/go-shared/logger"

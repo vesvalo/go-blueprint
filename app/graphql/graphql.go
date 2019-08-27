@@ -11,14 +11,14 @@ import (
 
 	gqlgen "github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/handler"
-	"github.com/Nerufa/blueprint/generated/graphql"
+	"github.com/Nerufa/go-blueprint/generated/graphql"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/Nerufa/go-shared/metric"
 	"github.com/Nerufa/go-shared/tracing"
 	"github.com/go-chi/chi"
 	"github.com/gorilla/websocket"
 
-	gqErrs "github.com/Nerufa/blueprint/app/graphql/errors"
+	gqErrs "github.com/Nerufa/go-blueprint/app/graphql/errors"
 )
 
 var errInternalServer = errors.New("internal server error")

@@ -2,10 +2,10 @@ package resolver
 
 import (
 	"context"
-	"github.com/Nerufa/blueprint/generated/resources/proto/ms"
+	"github.com/Nerufa/go-blueprint/generated/resources/proto/ms"
 	"github.com/gurukami/typ/v2"
 
-	graphql1 "github.com/Nerufa/blueprint/generated/graphql"
+	graphql1 "github.com/Nerufa/go-blueprint/generated/graphql"
 )
 
 type msMutationResolver struct{ *Resolver }

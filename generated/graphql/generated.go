@@ -386,7 +386,7 @@ func (ec *executionContext) field_MsQuery_search_args(ctx context.Context, rawAr
 	args["query"] = arg0
 	var arg1 CursorIn
 	if tmp, ok := rawArgs["cursor"]; ok {
-		arg1, err = ec.unmarshalNCursorIn2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐCursorIn(ctx, tmp)
+		arg1, err = ec.unmarshalNCursorIn2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐCursorIn(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -394,7 +394,7 @@ func (ec *executionContext) field_MsQuery_search_args(ctx context.Context, rawAr
 	args["cursor"] = arg1
 	var arg2 OrderIn
 	if tmp, ok := rawArgs["order"]; ok {
-		arg2, err = ec.unmarshalNOrderIn2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐOrderIn(ctx, tmp)
+		arg2, err = ec.unmarshalNOrderIn2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐOrderIn(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -679,7 +679,7 @@ func (ec *executionContext) _MsMutation_new(ctx context.Context, field graphql.C
 	res := resTmp.(*NewOut)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNNewOut2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐNewOut(ctx, field.Selections, res)
+	return ec.marshalNNewOut2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐNewOut(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _MsQuery_search(ctx context.Context, field graphql.CollectedField, obj *MsQuery) (ret graphql.Marshaler) {
@@ -723,7 +723,7 @@ func (ec *executionContext) _MsQuery_search(ctx context.Context, field graphql.C
 	res := resTmp.(*SearchOut)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNSearchOut2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐSearchOut(ctx, field.Selections, res)
+	return ec.marshalNSearchOut2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐSearchOut(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Mutation_ms(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -757,7 +757,7 @@ func (ec *executionContext) _Mutation_ms(ctx context.Context, field graphql.Coll
 	res := resTmp.(*MsMutation)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOMsMutation2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐMsMutation(ctx, field.Selections, res)
+	return ec.marshalOMsMutation2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐMsMutation(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _NewOut_status(ctx context.Context, field graphql.CollectedField, obj *NewOut) (ret graphql.Marshaler) {
@@ -794,7 +794,7 @@ func (ec *executionContext) _NewOut_status(ctx context.Context, field graphql.Co
 	res := resTmp.(NewOutStatus)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNNewOutStatus2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐNewOutStatus(ctx, field.Selections, res)
+	return ec.marshalNNewOutStatus2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐNewOutStatus(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _NewOut_id(ctx context.Context, field graphql.CollectedField, obj *NewOut) (ret graphql.Marshaler) {
@@ -865,7 +865,7 @@ func (ec *executionContext) _Query_ms(ctx context.Context, field graphql.Collect
 	res := resTmp.(*MsQuery)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalOMsQuery2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐMsQuery(ctx, field.Selections, res)
+	return ec.marshalOMsQuery2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐMsQuery(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -906,7 +906,7 @@ func (ec *executionContext) _Query___type(ctx context.Context, field graphql.Col
 	res := resTmp.(*introspection.Type)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalO__Type2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
+	return ec.marshalO__Type2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___schema(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -940,7 +940,7 @@ func (ec *executionContext) _Query___schema(ctx context.Context, field graphql.C
 	res := resTmp.(*introspection.Schema)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalO__Schema2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐSchema(ctx, field.Selections, res)
+	return ec.marshalO__Schema2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐSchema(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _SearchOut_status(ctx context.Context, field graphql.CollectedField, obj *SearchOut) (ret graphql.Marshaler) {
@@ -977,7 +977,7 @@ func (ec *executionContext) _SearchOut_status(ctx context.Context, field graphql
 	res := resTmp.(SearchOutStatus)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNSearchOutStatus2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐSearchOutStatus(ctx, field.Selections, res)
+	return ec.marshalNSearchOutStatus2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐSearchOutStatus(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _SearchOut_id(ctx context.Context, field graphql.CollectedField, obj *SearchOut) (ret graphql.Marshaler) {
@@ -1051,7 +1051,7 @@ func (ec *executionContext) _SearchOut_cursor(ctx context.Context, field graphql
 	res := resTmp.(*CursorOut)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNCursorOut2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐCursorOut(ctx, field.Selections, res)
+	return ec.marshalNCursorOut2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐCursorOut(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Directive_name(ctx context.Context, field graphql.CollectedField, obj *introspection.Directive) (ret graphql.Marshaler) {
@@ -1196,7 +1196,7 @@ func (ec *executionContext) ___Directive_args(ctx context.Context, field graphql
 	res := resTmp.([]introspection.InputValue)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalN__InputValue2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx, field.Selections, res)
+	return ec.marshalN__InputValue2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___EnumValue_name(ctx context.Context, field graphql.CollectedField, obj *introspection.EnumValue) (ret graphql.Marshaler) {
@@ -1446,7 +1446,7 @@ func (ec *executionContext) ___Field_args(ctx context.Context, field graphql.Col
 	res := resTmp.([]introspection.InputValue)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalN__InputValue2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx, field.Selections, res)
+	return ec.marshalN__InputValue2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Field_type(ctx context.Context, field graphql.CollectedField, obj *introspection.Field) (ret graphql.Marshaler) {
@@ -1483,7 +1483,7 @@ func (ec *executionContext) ___Field_type(ctx context.Context, field graphql.Col
 	res := resTmp.(*introspection.Type)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalN__Type2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
+	return ec.marshalN__Type2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Field_isDeprecated(ctx context.Context, field graphql.CollectedField, obj *introspection.Field) (ret graphql.Marshaler) {
@@ -1662,7 +1662,7 @@ func (ec *executionContext) ___InputValue_type(ctx context.Context, field graphq
 	res := resTmp.(*introspection.Type)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalN__Type2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
+	return ec.marshalN__Type2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___InputValue_defaultValue(ctx context.Context, field graphql.CollectedField, obj *introspection.InputValue) (ret graphql.Marshaler) {
@@ -1733,7 +1733,7 @@ func (ec *executionContext) ___Schema_types(ctx context.Context, field graphql.C
 	res := resTmp.([]introspection.Type)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalN__Type2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
+	return ec.marshalN__Type2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Schema_queryType(ctx context.Context, field graphql.CollectedField, obj *introspection.Schema) (ret graphql.Marshaler) {
@@ -1770,7 +1770,7 @@ func (ec *executionContext) ___Schema_queryType(ctx context.Context, field graph
 	res := resTmp.(*introspection.Type)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalN__Type2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
+	return ec.marshalN__Type2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Schema_mutationType(ctx context.Context, field graphql.CollectedField, obj *introspection.Schema) (ret graphql.Marshaler) {
@@ -1804,7 +1804,7 @@ func (ec *executionContext) ___Schema_mutationType(ctx context.Context, field gr
 	res := resTmp.(*introspection.Type)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalO__Type2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
+	return ec.marshalO__Type2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Schema_subscriptionType(ctx context.Context, field graphql.CollectedField, obj *introspection.Schema) (ret graphql.Marshaler) {
@@ -1838,7 +1838,7 @@ func (ec *executionContext) ___Schema_subscriptionType(ctx context.Context, fiel
 	res := resTmp.(*introspection.Type)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalO__Type2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
+	return ec.marshalO__Type2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Schema_directives(ctx context.Context, field graphql.CollectedField, obj *introspection.Schema) (ret graphql.Marshaler) {
@@ -1875,7 +1875,7 @@ func (ec *executionContext) ___Schema_directives(ctx context.Context, field grap
 	res := resTmp.([]introspection.Directive)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalN__Directive2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐDirective(ctx, field.Selections, res)
+	return ec.marshalN__Directive2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐDirective(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Type_kind(ctx context.Context, field graphql.CollectedField, obj *introspection.Type) (ret graphql.Marshaler) {
@@ -2021,7 +2021,7 @@ func (ec *executionContext) ___Type_fields(ctx context.Context, field graphql.Co
 	res := resTmp.([]introspection.Field)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalO__Field2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐField(ctx, field.Selections, res)
+	return ec.marshalO__Field2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐField(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Type_interfaces(ctx context.Context, field graphql.CollectedField, obj *introspection.Type) (ret graphql.Marshaler) {
@@ -2055,7 +2055,7 @@ func (ec *executionContext) ___Type_interfaces(ctx context.Context, field graphq
 	res := resTmp.([]introspection.Type)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalO__Type2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
+	return ec.marshalO__Type2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Type_possibleTypes(ctx context.Context, field graphql.CollectedField, obj *introspection.Type) (ret graphql.Marshaler) {
@@ -2089,7 +2089,7 @@ func (ec *executionContext) ___Type_possibleTypes(ctx context.Context, field gra
 	res := resTmp.([]introspection.Type)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalO__Type2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
+	return ec.marshalO__Type2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Type_enumValues(ctx context.Context, field graphql.CollectedField, obj *introspection.Type) (ret graphql.Marshaler) {
@@ -2130,7 +2130,7 @@ func (ec *executionContext) ___Type_enumValues(ctx context.Context, field graphq
 	res := resTmp.([]introspection.EnumValue)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalO__EnumValue2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐEnumValue(ctx, field.Selections, res)
+	return ec.marshalO__EnumValue2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐEnumValue(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Type_inputFields(ctx context.Context, field graphql.CollectedField, obj *introspection.Type) (ret graphql.Marshaler) {
@@ -2164,7 +2164,7 @@ func (ec *executionContext) ___Type_inputFields(ctx context.Context, field graph
 	res := resTmp.([]introspection.InputValue)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalO__InputValue2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx, field.Selections, res)
+	return ec.marshalO__InputValue2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) ___Type_ofType(ctx context.Context, field graphql.CollectedField, obj *introspection.Type) (ret graphql.Marshaler) {
@@ -2198,7 +2198,7 @@ func (ec *executionContext) ___Type_ofType(ctx context.Context, field graphql.Co
 	res := resTmp.(*introspection.Type)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalO__Type2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
+	return ec.marshalO__Type2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, field.Selections, res)
 }
 
 // endregion **************************** field.gotpl *****************************
@@ -2759,15 +2759,15 @@ func (ec *executionContext) marshalNBoolean2bool(ctx context.Context, sel ast.Se
 	return res
 }
 
-func (ec *executionContext) unmarshalNCursorIn2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐCursorIn(ctx context.Context, v interface{}) (CursorIn, error) {
+func (ec *executionContext) unmarshalNCursorIn2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐCursorIn(ctx context.Context, v interface{}) (CursorIn, error) {
 	return ec.unmarshalInputCursorIn(ctx, v)
 }
 
-func (ec *executionContext) marshalNCursorOut2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐCursorOut(ctx context.Context, sel ast.SelectionSet, v CursorOut) graphql.Marshaler {
+func (ec *executionContext) marshalNCursorOut2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐCursorOut(ctx context.Context, sel ast.SelectionSet, v CursorOut) graphql.Marshaler {
 	return ec._CursorOut(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNCursorOut2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐCursorOut(ctx context.Context, sel ast.SelectionSet, v *CursorOut) graphql.Marshaler {
+func (ec *executionContext) marshalNCursorOut2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐCursorOut(ctx context.Context, sel ast.SelectionSet, v *CursorOut) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -2834,11 +2834,11 @@ func (ec *executionContext) marshalNInt2int(ctx context.Context, sel ast.Selecti
 	return res
 }
 
-func (ec *executionContext) marshalNNewOut2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐNewOut(ctx context.Context, sel ast.SelectionSet, v NewOut) graphql.Marshaler {
+func (ec *executionContext) marshalNNewOut2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐNewOut(ctx context.Context, sel ast.SelectionSet, v NewOut) graphql.Marshaler {
 	return ec._NewOut(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNNewOut2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐNewOut(ctx context.Context, sel ast.SelectionSet, v *NewOut) graphql.Marshaler {
+func (ec *executionContext) marshalNNewOut2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐNewOut(ctx context.Context, sel ast.SelectionSet, v *NewOut) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -2848,29 +2848,29 @@ func (ec *executionContext) marshalNNewOut2ᚖgithubᚗcomᚋNerufaᚋblueprint�
 	return ec._NewOut(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNNewOutStatus2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐNewOutStatus(ctx context.Context, v interface{}) (NewOutStatus, error) {
+func (ec *executionContext) unmarshalNNewOutStatus2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐNewOutStatus(ctx context.Context, v interface{}) (NewOutStatus, error) {
 	var res NewOutStatus
 	return res, res.UnmarshalGQL(v)
 }
 
-func (ec *executionContext) marshalNNewOutStatus2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐNewOutStatus(ctx context.Context, sel ast.SelectionSet, v NewOutStatus) graphql.Marshaler {
+func (ec *executionContext) marshalNNewOutStatus2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐNewOutStatus(ctx context.Context, sel ast.SelectionSet, v NewOutStatus) graphql.Marshaler {
 	return v
 }
 
-func (ec *executionContext) unmarshalNOrderIn2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐOrderIn(ctx context.Context, v interface{}) (OrderIn, error) {
+func (ec *executionContext) unmarshalNOrderIn2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐOrderIn(ctx context.Context, v interface{}) (OrderIn, error) {
 	var res OrderIn
 	return res, res.UnmarshalGQL(v)
 }
 
-func (ec *executionContext) marshalNOrderIn2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐOrderIn(ctx context.Context, sel ast.SelectionSet, v OrderIn) graphql.Marshaler {
+func (ec *executionContext) marshalNOrderIn2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐOrderIn(ctx context.Context, sel ast.SelectionSet, v OrderIn) graphql.Marshaler {
 	return v
 }
 
-func (ec *executionContext) marshalNSearchOut2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐSearchOut(ctx context.Context, sel ast.SelectionSet, v SearchOut) graphql.Marshaler {
+func (ec *executionContext) marshalNSearchOut2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐSearchOut(ctx context.Context, sel ast.SelectionSet, v SearchOut) graphql.Marshaler {
 	return ec._SearchOut(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNSearchOut2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐSearchOut(ctx context.Context, sel ast.SelectionSet, v *SearchOut) graphql.Marshaler {
+func (ec *executionContext) marshalNSearchOut2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐSearchOut(ctx context.Context, sel ast.SelectionSet, v *SearchOut) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -2880,12 +2880,12 @@ func (ec *executionContext) marshalNSearchOut2ᚖgithubᚗcomᚋNerufaᚋbluepri
 	return ec._SearchOut(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNSearchOutStatus2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐSearchOutStatus(ctx context.Context, v interface{}) (SearchOutStatus, error) {
+func (ec *executionContext) unmarshalNSearchOutStatus2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐSearchOutStatus(ctx context.Context, v interface{}) (SearchOutStatus, error) {
 	var res SearchOutStatus
 	return res, res.UnmarshalGQL(v)
 }
 
-func (ec *executionContext) marshalNSearchOutStatus2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐSearchOutStatus(ctx context.Context, sel ast.SelectionSet, v SearchOutStatus) graphql.Marshaler {
+func (ec *executionContext) marshalNSearchOutStatus2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐSearchOutStatus(ctx context.Context, sel ast.SelectionSet, v SearchOutStatus) graphql.Marshaler {
 	return v
 }
 
@@ -2903,11 +2903,11 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 	return res
 }
 
-func (ec *executionContext) marshalN__Directive2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐDirective(ctx context.Context, sel ast.SelectionSet, v introspection.Directive) graphql.Marshaler {
+func (ec *executionContext) marshalN__Directive2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐDirective(ctx context.Context, sel ast.SelectionSet, v introspection.Directive) graphql.Marshaler {
 	return ec.___Directive(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalN__Directive2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐDirective(ctx context.Context, sel ast.SelectionSet, v []introspection.Directive) graphql.Marshaler {
+func (ec *executionContext) marshalN__Directive2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐDirective(ctx context.Context, sel ast.SelectionSet, v []introspection.Directive) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -2931,7 +2931,7 @@ func (ec *executionContext) marshalN__Directive2ᚕgithubᚗcomᚋNerufaᚋbluep
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalN__Directive2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐDirective(ctx, sel, v[i])
+			ret[i] = ec.marshalN__Directive2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐDirective(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3015,19 +3015,19 @@ func (ec *executionContext) marshalN__DirectiveLocation2ᚕstring(ctx context.Co
 	return ret
 }
 
-func (ec *executionContext) marshalN__EnumValue2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐEnumValue(ctx context.Context, sel ast.SelectionSet, v introspection.EnumValue) graphql.Marshaler {
+func (ec *executionContext) marshalN__EnumValue2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐEnumValue(ctx context.Context, sel ast.SelectionSet, v introspection.EnumValue) graphql.Marshaler {
 	return ec.___EnumValue(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalN__Field2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐField(ctx context.Context, sel ast.SelectionSet, v introspection.Field) graphql.Marshaler {
+func (ec *executionContext) marshalN__Field2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐField(ctx context.Context, sel ast.SelectionSet, v introspection.Field) graphql.Marshaler {
 	return ec.___Field(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalN__InputValue2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx context.Context, sel ast.SelectionSet, v introspection.InputValue) graphql.Marshaler {
+func (ec *executionContext) marshalN__InputValue2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx context.Context, sel ast.SelectionSet, v introspection.InputValue) graphql.Marshaler {
 	return ec.___InputValue(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalN__InputValue2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx context.Context, sel ast.SelectionSet, v []introspection.InputValue) graphql.Marshaler {
+func (ec *executionContext) marshalN__InputValue2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx context.Context, sel ast.SelectionSet, v []introspection.InputValue) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -3051,7 +3051,7 @@ func (ec *executionContext) marshalN__InputValue2ᚕgithubᚗcomᚋNerufaᚋblue
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalN__InputValue2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx, sel, v[i])
+			ret[i] = ec.marshalN__InputValue2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3064,11 +3064,11 @@ func (ec *executionContext) marshalN__InputValue2ᚕgithubᚗcomᚋNerufaᚋblue
 	return ret
 }
 
-func (ec *executionContext) marshalN__Type2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v introspection.Type) graphql.Marshaler {
+func (ec *executionContext) marshalN__Type2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v introspection.Type) graphql.Marshaler {
 	return ec.___Type(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalN__Type2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v []introspection.Type) graphql.Marshaler {
+func (ec *executionContext) marshalN__Type2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v []introspection.Type) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -3092,7 +3092,7 @@ func (ec *executionContext) marshalN__Type2ᚕgithubᚗcomᚋNerufaᚋblueprint�
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalN__Type2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, sel, v[i])
+			ret[i] = ec.marshalN__Type2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3105,7 +3105,7 @@ func (ec *executionContext) marshalN__Type2ᚕgithubᚗcomᚋNerufaᚋblueprint�
 	return ret
 }
 
-func (ec *executionContext) marshalN__Type2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v *introspection.Type) graphql.Marshaler {
+func (ec *executionContext) marshalN__Type2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v *introspection.Type) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -3152,22 +3152,22 @@ func (ec *executionContext) marshalOBoolean2ᚖbool(ctx context.Context, sel ast
 	return ec.marshalOBoolean2bool(ctx, sel, *v)
 }
 
-func (ec *executionContext) marshalOMsMutation2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐMsMutation(ctx context.Context, sel ast.SelectionSet, v MsMutation) graphql.Marshaler {
+func (ec *executionContext) marshalOMsMutation2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐMsMutation(ctx context.Context, sel ast.SelectionSet, v MsMutation) graphql.Marshaler {
 	return ec._MsMutation(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalOMsMutation2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐMsMutation(ctx context.Context, sel ast.SelectionSet, v *MsMutation) graphql.Marshaler {
+func (ec *executionContext) marshalOMsMutation2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐMsMutation(ctx context.Context, sel ast.SelectionSet, v *MsMutation) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._MsMutation(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalOMsQuery2githubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐMsQuery(ctx context.Context, sel ast.SelectionSet, v MsQuery) graphql.Marshaler {
+func (ec *executionContext) marshalOMsQuery2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐMsQuery(ctx context.Context, sel ast.SelectionSet, v MsQuery) graphql.Marshaler {
 	return ec._MsQuery(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalOMsQuery2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋgeneratedᚋgraphqlᚐMsQuery(ctx context.Context, sel ast.SelectionSet, v *MsQuery) graphql.Marshaler {
+func (ec *executionContext) marshalOMsQuery2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋgeneratedᚋgraphqlᚐMsQuery(ctx context.Context, sel ast.SelectionSet, v *MsQuery) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -3229,7 +3229,7 @@ func (ec *executionContext) marshalOString2ᚖstring(ctx context.Context, sel as
 	return ec.marshalOString2string(ctx, sel, *v)
 }
 
-func (ec *executionContext) marshalO__EnumValue2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐEnumValue(ctx context.Context, sel ast.SelectionSet, v []introspection.EnumValue) graphql.Marshaler {
+func (ec *executionContext) marshalO__EnumValue2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐEnumValue(ctx context.Context, sel ast.SelectionSet, v []introspection.EnumValue) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -3256,7 +3256,7 @@ func (ec *executionContext) marshalO__EnumValue2ᚕgithubᚗcomᚋNerufaᚋbluep
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalN__EnumValue2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐEnumValue(ctx, sel, v[i])
+			ret[i] = ec.marshalN__EnumValue2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐEnumValue(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3269,7 +3269,7 @@ func (ec *executionContext) marshalO__EnumValue2ᚕgithubᚗcomᚋNerufaᚋbluep
 	return ret
 }
 
-func (ec *executionContext) marshalO__Field2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐField(ctx context.Context, sel ast.SelectionSet, v []introspection.Field) graphql.Marshaler {
+func (ec *executionContext) marshalO__Field2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐField(ctx context.Context, sel ast.SelectionSet, v []introspection.Field) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -3296,7 +3296,7 @@ func (ec *executionContext) marshalO__Field2ᚕgithubᚗcomᚋNerufaᚋblueprint
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalN__Field2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐField(ctx, sel, v[i])
+			ret[i] = ec.marshalN__Field2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐField(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3309,7 +3309,7 @@ func (ec *executionContext) marshalO__Field2ᚕgithubᚗcomᚋNerufaᚋblueprint
 	return ret
 }
 
-func (ec *executionContext) marshalO__InputValue2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx context.Context, sel ast.SelectionSet, v []introspection.InputValue) graphql.Marshaler {
+func (ec *executionContext) marshalO__InputValue2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx context.Context, sel ast.SelectionSet, v []introspection.InputValue) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -3336,7 +3336,7 @@ func (ec *executionContext) marshalO__InputValue2ᚕgithubᚗcomᚋNerufaᚋblue
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalN__InputValue2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx, sel, v[i])
+			ret[i] = ec.marshalN__InputValue2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐInputValue(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3349,22 +3349,22 @@ func (ec *executionContext) marshalO__InputValue2ᚕgithubᚗcomᚋNerufaᚋblue
 	return ret
 }
 
-func (ec *executionContext) marshalO__Schema2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐSchema(ctx context.Context, sel ast.SelectionSet, v introspection.Schema) graphql.Marshaler {
+func (ec *executionContext) marshalO__Schema2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐSchema(ctx context.Context, sel ast.SelectionSet, v introspection.Schema) graphql.Marshaler {
 	return ec.___Schema(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalO__Schema2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐSchema(ctx context.Context, sel ast.SelectionSet, v *introspection.Schema) graphql.Marshaler {
+func (ec *executionContext) marshalO__Schema2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐSchema(ctx context.Context, sel ast.SelectionSet, v *introspection.Schema) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec.___Schema(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalO__Type2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v introspection.Type) graphql.Marshaler {
+func (ec *executionContext) marshalO__Type2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v introspection.Type) graphql.Marshaler {
 	return ec.___Type(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalO__Type2ᚕgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v []introspection.Type) graphql.Marshaler {
+func (ec *executionContext) marshalO__Type2ᚕgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v []introspection.Type) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -3391,7 +3391,7 @@ func (ec *executionContext) marshalO__Type2ᚕgithubᚗcomᚋNerufaᚋblueprint�
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalN__Type2githubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, sel, v[i])
+			ret[i] = ec.marshalN__Type2githubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -3404,7 +3404,7 @@ func (ec *executionContext) marshalO__Type2ᚕgithubᚗcomᚋNerufaᚋblueprint�
 	return ret
 }
 
-func (ec *executionContext) marshalO__Type2ᚖgithubᚗcomᚋNerufaᚋblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v *introspection.Type) graphql.Marshaler {
+func (ec *executionContext) marshalO__Type2ᚖgithubᚗcomᚋNerufaᚋgoᚑblueprintᚋvendorᚋgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐType(ctx context.Context, sel ast.SelectionSet, v *introspection.Type) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}

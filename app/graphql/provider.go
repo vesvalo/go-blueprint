@@ -2,8 +2,8 @@ package graphql
 
 import (
 	"context"
-	"github.com/Nerufa/blueprint/app/resolver"
-	"github.com/Nerufa/blueprint/generated/graphql"
+	"github.com/Nerufa/go-blueprint/app/resolver"
+	"github.com/Nerufa/go-blueprint/generated/graphql"
 	"github.com/Nerufa/go-shared/config"
 	"github.com/Nerufa/go-shared/provider"
 	"github.com/google/wire"

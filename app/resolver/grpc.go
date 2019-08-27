@@ -1,8 +1,8 @@
 package resolver
 
 import (
-	diGRPC "github.com/Nerufa/blueprint/app/grpc"
-	"github.com/Nerufa/blueprint/cmd"
+	diGRPC "github.com/Nerufa/go-blueprint/app/grpc"
+	"github.com/Nerufa/go-blueprint/cmd"
 	"google.golang.org/grpc"
 	"sync"
 )

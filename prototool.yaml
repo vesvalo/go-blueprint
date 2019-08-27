@@ -3,7 +3,7 @@ protoc:
 
 generate:
   go_options:
-    import_path: github.com/Nerufa/blueprint
+    import_path: github.com/Nerufa/go-blueprint
 
   plugins:
     - name: go

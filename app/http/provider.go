@@ -2,7 +2,7 @@ package http
 
 import (
 	"context"
-	"github.com/Nerufa/blueprint/app/graphql"
+	"github.com/Nerufa/go-blueprint/app/graphql"
 	"github.com/Nerufa/go-shared/config"
 	"github.com/Nerufa/go-shared/provider"
 	"github.com/go-chi/chi"

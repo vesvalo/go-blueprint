@@ -1,18 +1,23 @@
 
-## How to start
-* Install `go`, `make`, `docker`
-* Examine make commands, just run `make`
-* `make all` must call only once
-* Actual documentation `godoc -http=:6060`
-* Build application `make build`
-* Enjoy!
+## How to start on Windows
+* Install **MSYS2** https://www.msys2.org/ and append `bin` directory of MSYS2 to the `PATH` environment variable
+* Install `docker`
+* All commands should be execute in **DIND** container run `make dind`
+* See **Development** section below for examine commands of make
 
-## Start application
-* Up services `make dev-docker-compose-up`
-* Apply migration `sql-migrate up -env="local"`
-* Start API Gateway on :8080 `./artifacts/bin gateway -c ./artifacts/configs/local.yaml -b :8080 -d`
-* Start MS on :8081 `./artifacts/bin daemon -c ./artifacts/configs/local.yaml -b :8081 -d`
-* Navigate to http://localhost:8080/client in your browser and paste queries below from "Usage" section
+## How to start on Mac, Linux
+* Install `make`, `docker`
+* There are two way for development: 
+    * Native (recommend) 
+        * Install `go` and see **Development** section below
+    * DIND container (slow file system on Mac)
+        * Run `make dind` and see **Development** section below
+
+## Development
+* For help, run `make`
+* Download dependencies `make vendor`
+* Generate source files from resource `make generate`
+* Build and run application `dev-build-up` (also it's usage for rebuild && recreate containers)
 
 ## Usage
 Create new item  
@@ -59,4 +64,4 @@ query{
 
 ## ENV
 * APP_WD - work directory, default: application directory 
-* APP_DB_POSTGRES_DSN - example `postgres://blueprint:insecure@localhost:5567?sslmode=disable`
+* APP_POSTGRES_DSN - example `postgres://blueprint:insecure@localhost:5567?sslmode=disable`

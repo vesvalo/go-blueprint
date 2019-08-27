@@ -1,4 +1,4 @@
-module github.com/Nerufa/blueprint
+module github.com/Nerufa/go-blueprint
 
 go 1.12
 

@@ -1,8 +1,8 @@
 package daemon
 
 import (
-	"github.com/Nerufa/blueprint/app/daemon"
-	"github.com/Nerufa/blueprint/cmd"
+	"github.com/Nerufa/go-blueprint/app/daemon"
+	"github.com/Nerufa/go-blueprint/cmd"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/spf13/cobra"
 )
