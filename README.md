@@ -15,6 +15,7 @@
 
 ## Development
 * For help, run `make`
+* Init local env `make up` should run only once
 * Download dependencies `make vendor`
 * Generate source files from resource `make generate`
 * Build and run application `dev-build-up` (also it's usage for rebuild && recreate containers)
@@ -50,13 +51,13 @@ query{
 }
 ```
 
-## Migration
-* new: `sql-migrate new -env="local" {name}`
-* up: `sql-migrate up -env="local"`
-* down: `sql-migrate down -env="local"`
-* redo: `sql-migrate redo -env="local"`
-* skip: `sql-migrate skip -env="local"`
-* status: `sql-migrate status -env="local"`
+## Migration (for Windows run only in DIND)
+* new: `./scripts/sql-migrate.sh new -env="local" {name}`
+* up: `./scripts/sql-migrate.sh up -env="local"`
+* down: `./scripts/sql-migrate.sh down -env="local"`
+* redo: `./scripts/sql-migrate.sh redo -env="local"`
+* skip: `./scripts/sql-migrate.sh skip -env="local"`
+* status: `./scripts/sql-migrate.sh status -env="local"`
 
 ## Requirements
 * GoLang 1.12+

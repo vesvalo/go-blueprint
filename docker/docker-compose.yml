@@ -8,3 +8,4 @@ services:
 networks:
   default:
     name: blueprint-default
+    external: true

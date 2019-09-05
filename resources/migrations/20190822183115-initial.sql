@@ -11,4 +11,4 @@ CREATE TABLE list
 
 -- +migrate Down
 
-DROP TABLE test;
+DROP TABLE list;

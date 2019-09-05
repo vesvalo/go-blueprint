@@ -2,72 +2,82 @@ ifndef VERBOSE
 .SILENT:
 endif
 
-override WORK_DIR ?= $(shell pwd)
-override GO_PKG ?= github.com/Nerufa/go-blueprint
-override GO_PATH ?= $(shell pwd)/../../../..
+override ROOT_DIR = $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-GOOS ?= "linux"
-GOARCH ?= "amd64"
-
-CGO_ENABLED ?= 0
-GO_IMAGE ?= nerufa/docker-go
-GO_IMAGE_TAG ?= 1.12
-
-DOCKER_IMAGE = nerufa/go-blueprint
 TAG ?= unknown
 CACHE_TAG ?= unknown_cache
-
-ifneq (, $(shell which go))
- GO_PKG = $(shell go list -e -f "{{ .ImportPath }}")
- GOOS = $(shell go env GOOS)
- GOARCH = $(shell go env GOARCH)
-endif
+GOOS ?= linux
+GOARCH ?= amd64
+CGO_ENABLED ?= 0
 
 define build_resources
- 	find "$(WORK_DIR)/resources" -maxdepth 1 -mindepth 1 -exec cp -R -f {} $(WORK_DIR)/artifacts/${1} \;
+ 	find "$(ROOT_DIR)/resources" -maxdepth 1 -mindepth 1 -exec cp -R -f {} $(ROOT_DIR)/artifacts/${1} \;
 endef
 
 define go_docker
+	. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
 	docker run --rm \
-		-v /${WORK_DIR}:/${WORK_DIR} \
-		-v /${GO_PATH}/pkg/mod:/${GO_PATH}/pkg/mod \
-		-w /${WORK_DIR} \
-		-e GOPATH=/${GO_PATH} \
-		${GO_IMAGE}:${GO_IMAGE_TAG} \
+		-v /${ROOT_DIR}:/${ROOT_DIR} \
+		-v /$${GO_PATH}/pkg/mod:/$${GO_PATH}/pkg/mod \
+		-w /${ROOT_DIR} \
+		-e GOPATH=/$${GO_PATH}:/go \
+		$${GO_IMAGE}:$${GO_IMAGE_TAG} \
 		sh -c 'GOOS=${GOOS} GOARCH=${GOARCH} CGO_ENABLED=${CGO_ENABLED} TAG=${TAG} $(subst ",,${1})'
 endef
 
-all: vendor generate build ## install cli tools, update vendor, generate code & build application
-.PHONY: all
+up: ## initialize required tools
+	. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
+	(docker network inspect $${DOCKER_NETWORK} &>/dev/null && echo "Docker network \"$${DOCKER_NETWORK}\" already created") || \
+	(echo "Create docker network" && docker network create $${DOCKER_NETWORK})
+	if [ "${DIND}" != "1" ]; then \
+		export GO111MODULE=on ;\
+		go get github.com/google/wire/cmd/wire@v0.3.0 && \
+			go get github.com/99designs/gqlgen@v0.9.3 && \
+			go get -u github.com/golangci/golangci-lint/cmd/golangci-lint && \
+			go get github.com/vektah/dataloaden@v0.3.0 ;\
+    fi;
+.PHONY: up
+
+down: ## reset to zero setting
+	. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
+	(docker network inspect $${DOCKER_NETWORK} &>/dev/null && \
+	(echo "Delete docker network" && docker network rm $${DOCKER_NETWORK}) || echo "Docker network \"$${DOCKER_NETWORK}\" already deleted")
+.PHONY: down
+
+build-resources: ## prepare artifacts for application binary
+	$(call build_resources)
+.PHONY: build-resources
 
 build: init ## build application
 	if [ "${DIND}" = "1" ]; then \
 		$(call go_docker,"make build") ;\
     else \
+		. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
+		echo "Build with parameters GOOS=${GOOS} GOARCH=${GOARCH} CGO_ENABLED=${CGO_ENABLED}" ;\
 		$(call build_resources) ;\
         GO111MODULE=on GOOS=${GOOS} GOARCH=${GOARCH} CGO_ENABLED=${CGO_ENABLED} \
-        go build -mod vendor -ldflags "-X $(GO_PKG)/cmd/version.appVersion=$(TAG)-$$(date -u +%Y%m%d%H%M)" -o "$(WORK_DIR)/artifacts/bin" main.go ;\
+        go build -mod vendor -ldflags "-X $${GO_PKG}/cmd/version.appVersion=$(TAG)-$$(date -u +%Y%m%d%H%M)" -o "$(ROOT_DIR)/artifacts/bin" main.go ;\
     fi;
 .PHONY: build
 
-clean: ## remove generated files, tidy vendor dependicies
+clean: ## remove generated files, tidy vendor dependencies
 	if [ "${DIND}" = "1" ]; then \
 		$(call go_docker,"make clean") ;\
     else \
         export GO111MODULE=on ;\
+        go mod tidy ;\
     	rm -rf profile.out artifacts/* generated/* vendor ;\
-    	go mod tidy ;\
     fi;
 .PHONY: clean
 
 dev-build-up: build docker-image-cache dev-docker-compose-up ## create new build and recreate containers in docker-compose
 .PHONY: dev-build-up
 
-dev-docker-compose-down: ## down dev env
-	TAG=${TAG} docker-compose -p blueprint -f docker/docker-compose.yml -f docker/docker-compose-local.yml down
+dev-docker-compose-down: ## stop and remove containers, networks, images, and volumes
+	TAG=${TAG} docker-compose -p blueprint -f docker/docker-compose.yml -f docker/docker-compose-local.yml down -v
 .PHONY: dev-docker-compose-down
 
-dev-docker-compose-up: ## up dev env
+dev-docker-compose-up: ## create and start containers
 	TAG=${TAG} docker-compose -p blueprint -f docker/docker-compose.yml -f docker/docker-compose-local.yml up -d
 .PHONY: dev-docker-compose-up
 
@@ -78,45 +88,48 @@ dind: ## useful for windows
 	if [ "${DIND}" = "1" ]; then \
 		echo "Already in DIND" ;\
     else \
-    	if [ -z "${GOPATH}" ]; then \
-    		echo "GOPATH should be present" && exit 1 ;\
-        fi ;\
+	    . ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
 	    docker run -it --rm --name dind --privileged \
             -v //var/run/docker.sock://var/run/docker.sock \
-            -v /${WORK_DIR}:/${WORK_DIR} \
-            -v /${GO_PATH}/pkg/mod:/${GO_PATH}/pkg/mod \
-            -w /${WORK_DIR} \
+            -v /${ROOT_DIR}:/${ROOT_DIR} \
+            -v /$${GO_PATH}/pkg/mod:/$${GO_PATH}/pkg/mod \
+            -w /${ROOT_DIR} \
             nerufa/docker-dind:19 ;\
     fi;
 .PHONY: dind
 
 docker-clean: ## delete previous docker image build
-	docker rmi ${DOCKER_IMAGE}:${TAG} || true ;\
+	. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
+	docker rmi $${DOCKER_IMAGE}:${CACHE_TAG} || true ;\
+	docker rmi $${DOCKER_IMAGE}:${TAG} || true
 .PHONY: docker-clean
 
 docker-image-cache: ## build docker image and tagged as cache
-	docker build --cache-from ${DOCKER_IMAGE}:${CACHE_TAG} -f "${WORK_DIR}/docker/app/Dockerfile" -t ${DOCKER_IMAGE}:${TAG} -t ${DOCKER_IMAGE}:${CACHE_TAG} ${WORK_DIR}
+	. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
+	docker build --cache-from $${DOCKER_IMAGE}:${CACHE_TAG} -f "${ROOT_DIR}/docker/app/Dockerfile" -t $${DOCKER_IMAGE}:${TAG} -t $${DOCKER_IMAGE}:${CACHE_TAG} ${ROOT_DIR}
 .PHONY: docker-image-cache
 
 docker-image: ## build docker image
-	docker build --cache-from ${DOCKER_IMAGE}:${CACHE_TAG} -f "${WORK_DIR}/docker/app/Dockerfile" -t ${DOCKER_IMAGE}:${TAG} ${WORK_DIR}
+	. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
+	docker build --cache-from $${DOCKER_IMAGE}:${CACHE_TAG} -f "${ROOT_DIR}/docker/app/Dockerfile" -t $${DOCKER_IMAGE}:${TAG} ${ROOT_DIR}
 .PHONY: docker-image
 
 docker-protoc-generate: ## generate proto, grpc client & server
 	docker run --rm \
-	 	-v /${WORK_DIR}/resources:/${WORK_DIR}/resources \
-	 	-v /${WORK_DIR}/generated:/${WORK_DIR}/generated \
-	 	-v /${WORK_DIR}/prototool.yaml:/${WORK_DIR}/prototool.yaml \
-	 	-w /${WORK_DIR} \
+	 	-v /${ROOT_DIR}/resources:/${ROOT_DIR}/resources \
+	 	-v /${ROOT_DIR}/generated:/${ROOT_DIR}/generated \
+	 	-v /${ROOT_DIR}/prototool.yaml:/${ROOT_DIR}/prototool.yaml \
+	 	-w /${ROOT_DIR} \
 	 	uber/prototool \
 	 	prototool generate resources/proto
 .PHONY: docker-protoc-generate
 
 docker-push: ## push docker image to registry
-	docker push ${DOCKER_IMAGE}:${TAG}
+	. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
+	docker push $${DOCKER_IMAGE}:${TAG}
 .PHONY: docker-push
 
-generate: gqlgen-generate docker-protoc-generate go-generate ## execute all generators
+generate: docker-protoc-generate vendor gqlgen-generate vendor go-generate ## execute all generators
 .PHONY: generate
 
 github-build: docker-image docker-push docker-clean ## build application in GitLab CI
@@ -129,7 +142,7 @@ go-depends: ## view final versions that will be used in a build for all direct a
 	if [ "${DIND}" = "1" ]; then \
 		$(call go_docker,"make go-depends") ;\
     else \
-        cd $(WORK_DIR) ;\
+        cd $(ROOT_DIR) ;\
         GO111MODULE=on go list -m all ;\
     fi;
 .PHONY: go-depends
@@ -138,8 +151,8 @@ go-generate: ## go generate
 	if [ "${DIND}" = "1" ]; then \
 		$(call go_docker,"make go-generate") ;\
     else \
-        cd $(WORK_DIR) ;\
-        go generate $$(go list ./app/...) || exit 1 ;\
+        cd $(ROOT_DIR) ;\
+        GO111MODULE=on go generate $$(go list ./app/...) || exit 1 ;\
         $(MAKE) vendor  ;\
     fi;
 .PHONY: go-generate
@@ -148,7 +161,7 @@ go-update-all: ## view available minor and patch upgrades for all direct and ind
 	if [ "${DIND}" = "1" ]; then \
 		$(call go_docker,"make go-update-all") ;\
     else \
-        cd $(WORK_DIR) ;\
+        cd $(ROOT_DIR) ;\
     	GO111MODULE=on go list -u -m all ;\
     fi;
 .PHONY: go-update-all
@@ -157,7 +170,7 @@ gqlgen-generate: ## generate graphql server
 	if [ "${DIND}" = "1" ]; then \
 		$(call go_docker,"make gqlgen-generate") ;\
     else \
-        gqlgen -v ;\
+        GO111MODULE=on go run github.com/99designs/gqlgen -v ;\
     fi;
 .PHONY: gqlgen-generate
 
@@ -195,7 +208,7 @@ vendor: ## update vendor dependencies
 	if [ "${DIND}" = "1" ]; then \
 		$(call go_docker,"make vendor") ;\
     else \
-        rm -rf $(WORK_DIR)/vendor ;\
+        rm -rf $(ROOT_DIR)/vendor ;\
     	GO111MODULE=on \
     	go mod vendor ;\
     fi;
