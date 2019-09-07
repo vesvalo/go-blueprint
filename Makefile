@@ -120,7 +120,7 @@ docker-protoc-generate: ## generate proto, grpc client & server
 	 	-v /${ROOT_DIR}/generated:/${ROOT_DIR}/generated \
 	 	-v /${ROOT_DIR}/prototool.yaml:/${ROOT_DIR}/prototool.yaml \
 	 	-w /${ROOT_DIR} \
-	 	uber/prototool \
+	 	nerufa/docker-prototool \
 	 	prototool generate resources/proto
 .PHONY: docker-protoc-generate
 
@@ -152,7 +152,7 @@ go-generate: ## go generate
 		$(call go_docker,"make go-generate") ;\
     else \
         cd $(ROOT_DIR) ;\
-        GO111MODULE=on go generate $$(go list ./app/...) || exit 1 ;\
+        GO111MODULE=on go generate $$(go list ./pkg/...) || exit 1 ;\
         $(MAKE) vendor  ;\
     fi;
 .PHONY: go-generate
@@ -190,7 +190,7 @@ test-with-coverage: ## test application with race and total coverage
 		$(call go_docker,"make test-with-coverage") ;\
     else \
         GO111MODULE=on CGO_ENABLED=1 \
-        go test -mod vendor -v -race -covermode atomic -coverprofile profile.out ./app/... || exit 1 ;\
+        go test -mod vendor -v -race -covermode atomic -coverprofile profile.out ./pkg/... || exit 1 ;\
         go tool cover -func=profile.out && rm -rf profile.out ;\
     fi;
 .PHONY: test-with-coverage
@@ -200,7 +200,7 @@ test: ## test application with race
 		$(call go_docker,"make test") ;\
     else \
         GO111MODULE=on CGO_ENABLED=1 \
-        go test -mod vendor  -race -v ./app/... ;\
+        go test -mod vendor  -race -v ./pkg/... ;\
     fi;
 .PHONY: test
 

@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	global "github.com/Nerufa/go-blueprint/cmd"
+	//
 	_ "github.com/lib/pq"
 	"github.com/rubenv/sql-migrate"
 	"github.com/spf13/cobra"
@@ -16,18 +17,13 @@ var (
 	db               *sql.DB
 	ms               *migrate.FileMigrationSource
 	initCmdFn        = func(cmd *cobra.Command, _ []string) (re error) {
-		var e error
-		defer func() {
-			recover()
-			re = e
-		}()
 		ms = &migrate.FileMigrationSource{
 			Dir: global.Slave.WorkDir() + "/migrations",
 		}
 		migrate.SetTable(argTable)
-		db, e = sql.Open("postgres", argDsn)
-		if e != nil {
-			return e
+		db, re = sql.Open("postgres", argDsn)
+		if re != nil {
+			return re
 		}
 		return nil
 	}

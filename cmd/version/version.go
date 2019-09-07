@@ -8,7 +8,7 @@ import (
 var (
 	// Version, get from ldflags
 	appVersion = "unknown"
-	// Version command
+	// Cmd version command
 	Cmd = &cobra.Command{
 		Use:           "version",
 		Short:         "Application version",

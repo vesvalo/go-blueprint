@@ -1,55 +1,48 @@
 package gateway
 
 import (
-	"github.com/Nerufa/go-blueprint/app/http"
+	"context"
 	"github.com/Nerufa/go-blueprint/cmd"
+	"github.com/Nerufa/go-blueprint/pkg/http"
+	"github.com/Nerufa/go-shared/config"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/spf13/cobra"
 )
 
+const Prefix = "cmd.gateway"
+
 var (
-	bind string
-	Cmd  = &cobra.Command{
+	Cmd = &cobra.Command{
 		Use:           "gateway",
 		Short:         "Gateway API daemon",
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		Run: func(_ *cobra.Command, _ []string) {
+			log := cmd.Slave.Logger().WithFields(logger.Fields{"service": Prefix})
 			var (
-				e error
-				s *http.Http
+				s *http.HTTP
 				c func()
+				e error
 			)
-			log, c, e := logger.Build(cmd.Slave)
-			if e != nil {
-				panic(e)
-			}
-			defer c()
-			defer func() {
-				if r := recover(); r != nil {
-					if re, _ := r.(error); re != nil {
-						log.Error(re.Error())
-					} else {
-						log.Alert("unhandled panic, err: %v", logger.Args(r))
-					}
+			cmd.Slave.Executor(func(ctx context.Context, initial config.Initial) error {
+				s, c, e = http.Build(ctx, initial)
+				if e != nil {
+					return e
 				}
-			}()
-			s, c, e = http.Build(cmd.Slave)
-			if e != nil {
-				log.Error(e.Error())
-				return
-			}
-			defer c()
-			if err := s.ListenAndServe(bind); err != nil {
-				log.Error(err.Error())
-				return
-			}
-			log.Info("daemon stopped successfully")
+				c()
+				return nil
+			}, func(ctx context.Context) error {
+				if e := s.ListenAndServe(); e != nil {
+					return e
+				}
+				log.Info("daemon stopped successfully")
+				return nil
+			})
 		},
 	}
 )
 
 func init() {
 	// pflags
-	Cmd.PersistentFlags().StringVarP(&bind, "bind", "b", ":8080", "bind address")
+	Cmd.PersistentFlags().StringP(http.UnmarshalKey+".bind", "b", ":8080", "bind address")
 }

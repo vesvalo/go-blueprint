@@ -8,5 +8,5 @@ model:
   filename: generated/graphql/models_gen.go
 
 resolver:
-  filename: app/resolver/resolver_gen.go
+  filename: pkg/resolver/resolver_gen.go
   type: Resolver
