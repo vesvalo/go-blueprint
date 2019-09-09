@@ -12,17 +12,15 @@ import (
 )
 
 // Cfg
-func Cfg(cfg config.Configurator) (Config, func(), error) {
-	c := Config{
-		Debug: cfg.IsDebug(),
-	}
-	e := cfg.UnmarshalKey(UnmarshalKey, &c)
+func Cfg(cfg config.Configurator) (*Config, func(), error) {
+	c := &Config{}
+	e := cfg.UnmarshalKeyOnReload(UnmarshalKey, c)
 	return c, func() {}, e
 }
 
 // CfgTest
-func CfgTest() (Config, func(), error) {
-	return Config{}, func() {}, nil
+func CfgTest() (*Config, func(), error) {
+	return &Config{}, func() {}, nil
 }
 
 // Repo
@@ -31,7 +29,7 @@ type Repo struct {
 }
 
 // Provider
-func Provider(ctx context.Context, set provider.AwareSet, appSet AppSet, cfg Config) (*Daemon, func(), error) {
+func Provider(ctx context.Context, set provider.AwareSet, appSet AppSet, cfg *Config) (*Daemon, func(), error) {
 	g := New(ctx, set, appSet, cfg)
 	return g, func() {}, nil
 }

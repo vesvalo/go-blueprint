@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/Nerufa/go-blueprint/cmd"
 	"github.com/Nerufa/go-blueprint/pkg/http"
-	"github.com/Nerufa/go-shared/config"
+	"github.com/Nerufa/go-shared/entrypoint"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/spf13/cobra"
 )
@@ -24,8 +24,13 @@ var (
 				c func()
 				e error
 			)
-			cmd.Slave.Executor(func(ctx context.Context, initial config.Initial) error {
-				s, c, e = http.Build(ctx, initial)
+			cmd.Slave.Executor(func(ctx context.Context) error {
+				cmd.Slave.OnReload(func(ctx context.Context) {
+					initial, ok := entrypoint.CtxExtractInitial(ctx)
+					log.Info("catch reload in %s, debug: %v, ok: %v", logger.Args(Prefix, initial.WorkDir, ok))
+				})
+				initial, _ := entrypoint.CtxExtractInitial(ctx)
+				s, c, e = http.Build(ctx, initial, cmd.Observer)
 				if e != nil {
 					return e
 				}
@@ -35,7 +40,6 @@ var (
 				if e := s.ListenAndServe(); e != nil {
 					return e
 				}
-				log.Info("daemon stopped successfully")
 				return nil
 			})
 		},
@@ -44,5 +48,5 @@ var (
 
 func init() {
 	// pflags
-	Cmd.PersistentFlags().StringP(http.UnmarshalKey+".bind", "b", ":8080", "bind address")
+	Cmd.PersistentFlags().StringP(http.UnmarshalKeyBind, "b", ":8080", "bind address")
 }

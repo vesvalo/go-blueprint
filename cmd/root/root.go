@@ -9,6 +9,7 @@ import (
 	"github.com/Nerufa/go-blueprint/cmd/version"
 	"github.com/Nerufa/go-shared/config"
 	"github.com/Nerufa/go-shared/entrypoint"
+	"github.com/Nerufa/go-shared/invoker"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/fatih/color"
 	"github.com/pkg/errors"
@@ -24,11 +25,14 @@ import (
 )
 
 var (
-	initial = config.Initial{}
-	log     logger.Logger
-	ep      entrypoint.Master
-	e       error
-	c       func()
+	configFile    string
+	debug         bool
+	gracefulDelay time.Duration
+	initial       = config.Initial{}
+	log           logger.Logger
+	ep            entrypoint.Master
+	e             error
+	c             func()
 )
 
 const (
@@ -85,16 +89,19 @@ var rootCmd = &cobra.Command{
 			return e
 		}
 
-		initial.Viper.SetConfigFile(initial.ConfigPath)
+		initial.Viper.SetConfigFile(configFile)
 
-		if initial.ConfigPath != "" {
+		if configFile != "" {
 			e := initial.Viper.ReadInConfig()
 			if e != nil {
 				return fmt.Errorf("can't read config, %v", errors.WithMessage(e, prefix))
 			}
 		}
 
-		ep, c, e = entrypoint.Build(context.Background(), initial)
+		inv := invoker.NewInvoker()
+		cmd.Observer = inv
+
+		ep, c, e = entrypoint.Build(context.Background(), initial, inv)
 		if e != nil {
 			return e
 		}
@@ -108,7 +115,11 @@ var rootCmd = &cobra.Command{
 			signal.Notify(reloadSignal, syscall.SIGHUP)
 			for {
 				sig := <-reloadSignal
-				ep.Reload()
+				//initial.Viper.Set("shared.debug", false)
+				//initial.Viper.Set("logger.debug", false)
+				//initial.Viper.Set("logger.debugTags", []string{"test"})
+				inv.Reload(context.Background())
+				//ep.Reload()
 				ep.Logger().Info("OS signaled `%v`, reload", logger.Args(sig.String()))
 			}
 		}()
@@ -117,8 +128,8 @@ var rootCmd = &cobra.Command{
 			shutdownSignal := make(chan os.Signal, 1)
 			signal.Notify(shutdownSignal, syscall.SIGTERM, syscall.SIGINT)
 			sig := <-shutdownSignal
-			ep.Logger().Info("OS signaled `%v`, graceful shutdown in %s", logger.Args(sig.String(), initial.GracefulDelay), logger.WithTags(logger.Tags{"test"}))
-			ctx, _ := context.WithTimeout(context.Background(), initial.GracefulDelay)
+			ep.Logger().Info("OS signaled `%v`, graceful shutdown in %s", logger.Args(sig.String(), gracefulDelay), logger.WithTags(logger.Tags{"test"}))
+			ctx, _ := context.WithTimeout(context.Background(), gracefulDelay)
 			ep.Shutdown(ctx, 0)
 		}()
 
@@ -127,7 +138,7 @@ var rootCmd = &cobra.Command{
 	PersistentPostRun: func(_ *cobra.Command, _ []string) {
 
 		preRun := func() error {
-			if initial.Debug {
+			if debug {
 				fmt.Printf(logo, version.Version())
 				fmt.Println(color.RedString("\n\n# DEBUG INFO\n"))
 				fmt.Printf("\nWork directory: %v\n\n", ep.WorkDir())
@@ -161,11 +172,11 @@ func init() {
 	initial.Viper.SetEnvKeyReplacer(strings.NewReplacer("-", "_", ".", "_"))
 	initial.Viper.AutomaticEnv()
 	// pflags
-	rootCmd.PersistentFlags().StringVarP(&initial.ConfigPath, "cmd.root.config", "c", "", "config file")
-	rootCmd.PersistentFlags().BoolVarP(&initial.Debug, "cmd.root.debug.power", "d", false, "debug mode")
-	rootCmd.PersistentFlags().StringVarP(&initial.LoggerLevel, "cmd.root.level", "l", "info", "logger level")
-	rootCmd.PersistentFlags().StringSliceVarP(&initial.DebugTags, "cmd.root.debug.tags", "t", []string{}, "logger tags for filter output, e.g.: -t tag -t tag2 -t key:value")
-	rootCmd.PersistentFlags().DurationVar(&initial.GracefulDelay, "cmd.root.graceful.delay", defaultGracefulDelay, "graceful delay")
+	rootCmd.PersistentFlags().StringVarP(&configFile, config.UnmarshalKeyConfigFile, "c", "", "config file")
+	rootCmd.PersistentFlags().BoolVarP(&debug, config.UnmarshalKeyDebug, "d", false, "debug mode")
+	rootCmd.PersistentFlags().StringP(logger.UnmarshalKeyLevel, "l", "info", "logger level")
+	rootCmd.PersistentFlags().StringSliceP(logger.UnmarshalKeyDebugTags, "t", []string{}, "logger tags for filter output, e.g.: -t tag -t tag2 -t key:value")
+	rootCmd.PersistentFlags().DurationVar(&gracefulDelay, config.UnmarshalKeyGracefulDelay, defaultGracefulDelay, "graceful delay")
 }
 
 func Execute(cmds ...*cobra.Command) {

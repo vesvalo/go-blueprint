@@ -11,23 +11,21 @@ import (
 )
 
 // Cfg
-func Cfg(cfg config.Configurator) (Config, func(), error) {
-	c := Config{
-		Debug: cfg.IsDebug(),
-	}
-	e := cfg.UnmarshalKey(UnmarshalKey, &c)
+func Cfg(cfg config.Configurator) (*Config, func(), error) {
+	c := &Config{}
+	e := cfg.UnmarshalKeyOnReload(UnmarshalKey, c)
 	c.Middleware = []func(http.Handler) http.Handler{
 	}
 	return c, func() {}, e
 }
 
 // CfgTest
-func CfgTest() (Config, func(), error) {
-	return Config{}, func() {}, nil
+func CfgTest() (*Config, func(), error) {
+	return &Config{}, func() {}, nil
 }
 
 // Provider
-func Provider(ctx context.Context, resolver graphql.Config, set provider.AwareSet, cfg Config) (*GraphQL, func(), error) {
+func Provider(ctx context.Context, resolver graphql.Config, set provider.AwareSet, cfg *Config) (*GraphQL, func(), error) {
 	g := New(ctx, resolver, set, cfg)
 	return g, func() {}, nil
 }

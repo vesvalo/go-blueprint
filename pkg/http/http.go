@@ -2,6 +2,7 @@ package http
 
 import (
 	"context"
+	"github.com/Nerufa/go-shared/invoker"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/Nerufa/go-shared/metric"
 	"github.com/Nerufa/go-shared/provider"
@@ -22,7 +23,6 @@ type HTTP struct {
 
 // ListenAndServe
 func (m *HTTP) ListenAndServe() (err error) {
-
 	server := &http.Server{
 		Addr:    m.cfg.Bind,
 		Handler: m.mux,
@@ -54,16 +54,27 @@ type Cors struct {
 
 // Config
 type Config struct {
-	Debug bool
-	Bind  string `required:"true"`
-	Cors  Cors
+	Debug   bool   `fallback:"shared.debug"`
+	Bind    string `required:"true"`
+	Cors    Cors
+	invoker invoker.Invoker
+}
+
+// OnReload
+func (c *Config) OnReload(callback func(ctx context.Context)) {
+	c.invoker.OnReload(callback)
+}
+
+// Reload
+func (c *Config) Reload(ctx context.Context) {
+	c.invoker.Reload(ctx)
 }
 
 // New
-func New(ctx context.Context, mux *chi.Mux, set provider.AwareSet, cfg Config) *HTTP {
+func New(ctx context.Context, mux *chi.Mux, set provider.AwareSet, cfg *Config) *HTTP {
 	return &HTTP{
 		ctx:     ctx,
-		cfg:     cfg,
+		cfg:     *cfg,
 		metric:  set.Metric,
 		tracing: set.Tracer,
 		mux:     mux,

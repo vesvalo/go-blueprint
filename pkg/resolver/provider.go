@@ -12,17 +12,15 @@ import (
 )
 
 // Cfg
-func Cfg(cfg config.Configurator) (Config, func(), error) {
-	c := Config{
-		Debug: cfg.IsDebug(),
-	}
-	e := cfg.UnmarshalKey(UnmarshalKey, &c)
+func Cfg(cfg config.Configurator) (*Config, func(), error) {
+	c := &Config{}
+	e := cfg.UnmarshalKeyOnReload(UnmarshalKey, c)
 	return c, func() {}, e
 }
 
 // CfgTest
-func CfgTest() (Config, func(), error) {
-	return Config{}, func() {}, nil
+func CfgTest() (*Config, func(), error) {
+	return &Config{}, func() {}, nil
 }
 
 type AppSet struct {
@@ -31,7 +29,7 @@ type AppSet struct {
 }
 
 // Provider
-func Provider(ctx context.Context, set provider.AwareSet, appSet AppSet, cfg Config) (graphql.Config, func(), error) {
+func Provider(ctx context.Context, set provider.AwareSet, appSet AppSet, cfg *Config) (graphql.Config, func(), error) {
 	c := New(ctx, set, appSet, cfg)
 	return c, func() {}, nil
 }

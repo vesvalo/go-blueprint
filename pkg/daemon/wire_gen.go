@@ -10,6 +10,7 @@ import (
 	"github.com/Nerufa/go-blueprint/pkg/db/repo"
 	"github.com/Nerufa/go-blueprint/pkg/db/trx"
 	"github.com/Nerufa/go-shared/config"
+	"github.com/Nerufa/go-shared/invoker"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/Nerufa/go-shared/metric"
 	"github.com/Nerufa/go-shared/postgres"
@@ -19,8 +20,8 @@ import (
 
 // Injectors from injector.go:
 
-func Build(ctx context.Context, initial config.Initial) (*Daemon, func(), error) {
-	configurator, cleanup, err := config.Provider(initial)
+func Build(ctx context.Context, initial config.Initial, observer invoker.Observer) (*Daemon, func(), error) {
+	configurator, cleanup, err := config.Provider(initial, observer)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -148,8 +149,8 @@ func Build(ctx context.Context, initial config.Initial) (*Daemon, func(), error)
 	}, nil
 }
 
-func BuildTest(ctx context.Context, initial config.Initial) (*Daemon, func(), error) {
-	configurator, cleanup, err := config.Provider(initial)
+func BuildTest(ctx context.Context, initial config.Initial, observer invoker.Observer) (*Daemon, func(), error) {
+	configurator, cleanup, err := config.Provider(initial, observer)
 	if err != nil {
 		return nil, nil, err
 	}

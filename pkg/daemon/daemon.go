@@ -6,6 +6,7 @@ import (
 	"github.com/Nerufa/go-blueprint/pkg/db/domain"
 	"github.com/Nerufa/go-blueprint/pkg/db/repo"
 	"github.com/Nerufa/go-blueprint/pkg/db/trx"
+	"github.com/Nerufa/go-shared/invoker"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/Nerufa/go-shared/metric"
 	"github.com/Nerufa/go-shared/provider"
@@ -103,9 +104,20 @@ type Keepalive struct {
 
 // Config is a general GRPC config settings
 type Config struct {
-	Bind string
-	Keepalive
-	Debug bool
+	Debug     bool   `fallback:"shared.debug"`
+	Bind      string `required:"true"`
+	Keepalive Keepalive
+	invoker   invoker.Invoker
+}
+
+// OnReload
+func (c *Config) OnReload(callback func(ctx context.Context)) {
+	c.invoker.OnReload(callback)
+}
+
+// Reload
+func (c *Config) Reload(ctx context.Context) {
+	c.invoker.Reload(ctx)
 }
 
 type AppSet struct {
@@ -114,15 +126,15 @@ type AppSet struct {
 }
 
 // New
-func New(ctx context.Context, set provider.AwareSet, appSet AppSet, cfg Config) *Daemon {
+func New(ctx context.Context, set provider.AwareSet, appSet AppSet, cfg *Config) *Daemon {
 	s := grpc.NewServer(
-		grpc.KeepaliveParams(cfg.ServerParameters),
-		grpc.KeepaliveEnforcementPolicy(cfg.EnforcementPolicy),
+		grpc.KeepaliveParams(cfg.Keepalive.ServerParameters),
+		grpc.KeepaliveEnforcementPolicy(cfg.Keepalive.EnforcementPolicy),
 	)
 	return &Daemon{
 		server:  s,
 		ctx:     ctx,
-		cfg:     cfg,
+		cfg:     *cfg,
 		metric:  set.Metric,
 		tracing: set.Tracer,
 		log:     set.Logger.WithFields(logger.Fields{"service": Prefix}),

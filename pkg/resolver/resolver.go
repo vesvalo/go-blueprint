@@ -8,6 +8,7 @@ import (
 	"github.com/Nerufa/go-blueprint/pkg/db/domain"
 	"github.com/Nerufa/go-blueprint/pkg/db/trx"
 	gqErrs "github.com/Nerufa/go-blueprint/pkg/graphql/errors"
+	"github.com/Nerufa/go-shared/invoker"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/Nerufa/go-shared/metric"
 	"github.com/Nerufa/go-shared/provider"
@@ -19,7 +20,18 @@ type queryResolver struct{ *Resolver }
 
 // Config custom graphql settings resolvers
 type Config struct {
-	Debug bool
+	Debug   bool `fallback:"shared.debug"`
+	invoker invoker.Invoker
+}
+
+// OnReload
+func (c *Config) OnReload(callback func(ctx context.Context)) {
+	c.invoker.OnReload(callback)
+}
+
+// Reload
+func (c *Config) Reload(ctx context.Context) {
+	c.invoker.Reload(ctx)
 }
 
 // Resolver config graphql resolvers
@@ -27,7 +39,7 @@ type Resolver struct {
 	ctx    context.Context
 	log    logger.Logger
 	tracer tracing.Tracer
-	cfg    Config
+	cfg    *Config
 	metric metric.Scope
 	repo   Repo
 	trx    *trx.Manager
@@ -56,7 +68,7 @@ type Repo struct {
 }
 
 // New returns instance of config graphql resolvers
-func New(ctx context.Context, set provider.AwareSet, appSet AppSet, cfg Config) graphql1.Config {
+func New(ctx context.Context, set provider.AwareSet, appSet AppSet, cfg *Config) graphql1.Config {
 	c := graphql1.Config{
 		Resolvers: &Resolver{
 			ctx:    ctx,

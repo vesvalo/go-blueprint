@@ -12,6 +12,7 @@ import (
 	"github.com/Nerufa/go-blueprint/pkg/graphql"
 	"github.com/Nerufa/go-blueprint/pkg/resolver"
 	"github.com/Nerufa/go-shared/config"
+	"github.com/Nerufa/go-shared/invoker"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/Nerufa/go-shared/metric"
 	"github.com/Nerufa/go-shared/postgres"
@@ -21,8 +22,8 @@ import (
 
 // Injectors from injector.go:
 
-func Build(ctx context.Context, initial config.Initial) (*HTTP, func(), error) {
-	configurator, cleanup, err := config.Provider(initial)
+func Build(ctx context.Context, initial config.Initial, observer invoker.Observer) (*HTTP, func(), error) {
+	configurator, cleanup, err := config.Provider(initial, observer)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -243,8 +244,8 @@ func Build(ctx context.Context, initial config.Initial) (*HTTP, func(), error) {
 	}, nil
 }
 
-func BuildTest(ctx context.Context, initial config.Initial) (*HTTP, func(), error) {
-	configurator, cleanup, err := config.Provider(initial)
+func BuildTest(ctx context.Context, initial config.Initial, observer invoker.Observer) (*HTTP, func(), error) {
+	configurator, cleanup, err := config.Provider(initial, observer)
 	if err != nil {
 		return nil, nil, err
 	}

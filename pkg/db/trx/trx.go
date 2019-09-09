@@ -6,11 +6,11 @@ import (
 	"sync"
 )
 
-type WithTrx string
+type WithKeyTrx string
 
 const (
 	Prefix = "app.db.trx"
-	CtxTrx = WithTrx(Prefix)
+	CtxKeyTrx = WithKeyTrx(Prefix)
 )
 
 type Trx struct {
@@ -46,14 +46,14 @@ type Manager struct {
 func (t *Manager) Begin(ctx context.Context) (trx *Trx, c context.Context) {
 	trx = &Trx{}
 	trx.db = t.db.Begin()
-	c = context.WithValue(ctx, CtxTrx, trx)
+	c = context.WithValue(ctx, CtxKeyTrx, trx)
 	c, trx.done = context.WithCancel(c)
 	return trx, c
 }
 
 // Inject
 func Inject(ctx context.Context, db *gorm.DB) *gorm.DB {
-	if t, ok := ctx.Value(CtxTrx).(*Trx); ok {
+	if t, ok := ctx.Value(CtxKeyTrx).(*Trx); ok {
 		return t.db
 	}
 	return db

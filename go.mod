@@ -4,7 +4,7 @@ go 1.12
 
 require (
 	github.com/99designs/gqlgen v0.9.3
-	github.com/Nerufa/go-shared v1.2.0
+	github.com/Nerufa/go-shared v1.3.0
 	github.com/agnivade/levenshtein v1.0.2 // indirect
 	github.com/cactus/go-statsd-client/statsd v0.0.0-20190906215803-47b6058c80f5 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20190906004059-62cf760a6c9e // indirect

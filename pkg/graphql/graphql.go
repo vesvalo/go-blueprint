@@ -2,6 +2,7 @@ package graphql
 
 import (
 	"context"
+	"github.com/Nerufa/go-shared/invoker"
 	"github.com/Nerufa/go-shared/provider"
 	"github.com/pkg/errors"
 	"github.com/vektah/gqlparser/gqlerror"
@@ -28,7 +29,7 @@ type GraphQL struct {
 	ctx      context.Context
 	resolver *graphql.Config
 	log      logger.Logger
-	cfg      Config
+	cfg      *Config
 	metric   metric.Scope
 	tracing  tracing.Tracer
 }
@@ -105,15 +106,26 @@ type PlaygroundCfg struct {
 
 // Config
 type Config struct {
-	Debug         bool
+	Debug         bool `fallback:"shared.debug"`
 	Introspection bool
 	Middleware    []func(http.Handler) http.Handler
 	Playground    PlaygroundCfg
 	Route         string
+	invoker       invoker.Invoker
+}
+
+// OnReload
+func (c *Config) OnReload(callback func(ctx context.Context)) {
+	c.invoker.OnReload(callback)
+}
+
+// Reload
+func (c *Config) Reload(ctx context.Context) {
+	c.invoker.Reload(ctx)
 }
 
 // New
-func New(ctx context.Context, resolver graphql.Config, set provider.AwareSet, cfg Config) *GraphQL {
+func New(ctx context.Context, resolver graphql.Config, set provider.AwareSet, cfg *Config) *GraphQL {
 	return &GraphQL{
 		ctx:      ctx,
 		resolver: &resolver,

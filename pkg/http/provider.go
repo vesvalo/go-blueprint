@@ -16,21 +16,19 @@ import (
 var mux *chi.Mux
 
 // Cfg
-func Cfg(cfg config.Configurator) (Config, func(), error) {
-	c := Config{
-		Debug: cfg.IsDebug(),
-	}
-	e := cfg.UnmarshalKey(UnmarshalKey, &c)
+func Cfg(cfg config.Configurator) (*Config, func(), error) {
+	c := &Config{}
+	e := cfg.UnmarshalKeyOnReload(UnmarshalKey, c)
 	return c, func() {}, e
 }
 
 // CfgTest
-func CfgTest() (Config, func(), error) {
-	return Config{}, func() {}, nil
+func CfgTest() (*Config, func(), error) {
+	return &Config{}, func() {}, nil
 }
 
 // Mux
-func Mux(routers Routers, cfg Config) (*chi.Mux, func(), error) {
+func Mux(routers Routers, cfg *Config) (*chi.Mux, func(), error) {
 	if mux != nil {
 		return mux, func() {}, nil
 	}
@@ -74,7 +72,7 @@ var ProviderRoutersTest = wire.NewSet(
 )
 
 // Provider
-func Provider(ctx context.Context, mux *chi.Mux, set provider.AwareSet, cfg Config) (*HTTP, func(), error) {
+func Provider(ctx context.Context, mux *chi.Mux, set provider.AwareSet, cfg *Config) (*HTTP, func(), error) {
 	g := New(ctx, mux, set, cfg)
 	return g, func() {}, nil
 }

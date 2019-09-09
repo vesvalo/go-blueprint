@@ -19,7 +19,7 @@ func getConnGRPC(ctx context.Context, srv string) (*grpc.ClientConn, diGRPC.Done
 		pmMu.Lock()
 		defer pmMu.Unlock()
 		if poolManager == nil {
-			pm, _, e := diGRPC.Build(ctx, cmd.Slave.Config())
+			pm, _, e := diGRPC.Build(ctx, cmd.Slave.Initial(), nil)
 			if e != nil {
 				return nil, func() {}, e
 			}

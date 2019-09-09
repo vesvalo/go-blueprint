@@ -3,6 +3,7 @@ package grpc
 import (
 	"context"
 	"github.com/Nerufa/go-shared/config"
+	"github.com/Nerufa/go-shared/invoker"
 	"github.com/Nerufa/go-shared/provider"
 	"github.com/google/wire"
 	"google.golang.org/grpc/keepalive"
@@ -18,7 +19,7 @@ var (
 // Cfg
 func Cfg(cfg config.Configurator) (*Config, func(), error) {
 	c := &Config{}
-	e := cfg.UnmarshalKey(UnmarshalKey, c)
+	e := cfg.UnmarshalKeyOnReload(UnmarshalKey, c)
 	return c, func() {}, e
 }
 
@@ -36,6 +37,17 @@ type Service struct {
 type Config struct {
 	Services         map[string]*Service
 	ClientParameters *keepalive.ClientParameters
+	invoker          invoker.Invoker
+}
+
+// OnReload
+func (c *Config) OnReload(callback func(ctx context.Context)) {
+	c.invoker.OnReload(callback)
+}
+
+// Reload
+func (c *Config) Reload(ctx context.Context) {
+	c.invoker.Reload(ctx)
 }
 
 // Provider

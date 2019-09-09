@@ -8,6 +8,7 @@ package grpc
 import (
 	"context"
 	"github.com/Nerufa/go-shared/config"
+	"github.com/Nerufa/go-shared/invoker"
 	"github.com/Nerufa/go-shared/logger"
 	"github.com/Nerufa/go-shared/metric"
 	"github.com/Nerufa/go-shared/provider"
@@ -16,8 +17,8 @@ import (
 
 // Injectors from injector.go:
 
-func Build(ctx context.Context, initial config.Initial) (*PoolManager, func(), error) {
-	configurator, cleanup, err := config.Provider(initial)
+func Build(ctx context.Context, initial config.Initial, observer invoker.Observer) (*PoolManager, func(), error) {
+	configurator, cleanup, err := config.Provider(initial, observer)
 	if err != nil {
 		return nil, nil, err
 	}

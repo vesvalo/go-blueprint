@@ -12,7 +12,7 @@ import (
 type PoolManager struct {
 	ctx     context.Context
 	tracing tracing.Tracer
-	cfg     *Config
+	cfg     Config
 }
 
 // New
@@ -44,5 +44,5 @@ func (p *PoolManager) New(service string) (_ *Pool, loaded bool, _ error) {
 
 // NewPoolManager
 func NewPoolManager(ctx context.Context, set provider.AwareSet, cfg *Config) *PoolManager {
-	return &PoolManager{ctx: ctx, tracing: set.Tracer, cfg: cfg}
+	return &PoolManager{ctx: ctx, tracing: set.Tracer, cfg: *cfg}
 }
