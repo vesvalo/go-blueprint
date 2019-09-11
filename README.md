@@ -18,7 +18,7 @@
 * Init local env `make up` should run only once
 * Download dependencies `make vendor`
 * Generate source files from resource `make generate`
-* Build and run application `dev-build-up` (also it's usage for rebuild && recreate containers)
+* Build and run application `make dev-build-up` (also it's usage for rebuild && recreate containers)
 
 ## Usage
 Create new item  
