@@ -1,7 +1,7 @@
 package resolver
 
 const (
-	Prefix       = "app.resolver"
+	Prefix       = "pkg.resolver"
 	UnmarshalKey = "resolver"
 	srvMs        = "ms"
 )

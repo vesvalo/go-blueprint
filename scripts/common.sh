@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-if [ -n $1 ] && [ ${0:0:4} == "/bin" ]; then
+if [ -n "$1" ] && [ ${0:0:4} = "/bin" ]; then
   ROOT_DIR=$1/..
 else
   ROOT_DIR="$( cd "$( dirname "$0" )" && pwd )/.."
@@ -14,3 +14,4 @@ GOOS="linux"
 GOARCH="amd64"
 DOCKER_NETWORK="blueprint-default"
 DOCKER_IMAGE=nerufa/go-blueprint
+PROJECT_NAME="blueprint"

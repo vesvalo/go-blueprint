@@ -1,7 +1,7 @@
 package http
 
 const (
-	Prefix           = "app.http"
+	Prefix           = "pkg.http"
 	UnmarshalKey     = "http"
 	UnmarshalKeyBind = "http.bind"
 )

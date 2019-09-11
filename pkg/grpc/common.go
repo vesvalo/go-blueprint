@@ -3,7 +3,7 @@ package grpc
 import "github.com/pkg/errors"
 
 const (
-	Prefix       = "app.grpc"
+	Prefix       = "pkg.grpc"
 	UnmarshalKey = "grpc"
 )
 

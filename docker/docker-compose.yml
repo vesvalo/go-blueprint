@@ -7,5 +7,5 @@ services:
       - default
 networks:
   default:
-    name: blueprint-default
+    name: ${DOCKER_NETWORK}
     external: true

@@ -38,7 +38,7 @@ up: ## initialize required tools
     fi;
 .PHONY: up
 
-down: ## reset to zero setting
+down: dev-docker-compose-down ## reset to zero setting
 	. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
 	(docker network inspect $${DOCKER_NETWORK} &>/dev/null && \
 	(echo "Delete docker network" && docker network rm $${DOCKER_NETWORK}) || echo "Docker network \"$${DOCKER_NETWORK}\" already deleted")
@@ -74,11 +74,13 @@ dev-build-up: build docker-image-cache dev-docker-compose-up ## create new build
 .PHONY: dev-build-up
 
 dev-docker-compose-down: ## stop and remove containers, networks, images, and volumes
-	TAG=${TAG} docker-compose -p blueprint -f docker/docker-compose.yml -f docker/docker-compose-local.yml down -v
+	. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
+	TAG=${TAG} DOCKER_NETWORK=$${DOCKER_NETWORK} docker-compose -p $${PROJECT_NAME} -f docker/docker-compose.yml -f docker/docker-compose-local.yml down -v
 .PHONY: dev-docker-compose-down
 
 dev-docker-compose-up: ## create and start containers
-	TAG=${TAG} docker-compose -p blueprint -f docker/docker-compose.yml -f docker/docker-compose-local.yml up -d
+	. ${ROOT_DIR}/scripts/common.sh ${ROOT_DIR}/scripts ;\
+	TAG=${TAG} DOCKER_NETWORK=$${DOCKER_NETWORK} docker-compose -p $${PROJECT_NAME} -f docker/docker-compose.yml -f docker/docker-compose-local.yml up -d
 .PHONY: dev-docker-compose-up
 
 dev-test: test lint ## test application in dev env with race and lint
@@ -132,10 +134,10 @@ docker-push: ## push docker image to registry
 generate: docker-protoc-generate vendor gqlgen-generate vendor go-generate ## execute all generators
 .PHONY: generate
 
-github-build: docker-image docker-push docker-clean ## build application in GitLab CI
+github-build: docker-image docker-push docker-clean ## build application in CI
 .PHONY: github-build
 
-github-test: vendor test-with-coverage ## test application in GitLab CI
+github-test: vendor test-with-coverage ## test application in CI
 .PHONY: github-test
 
 go-depends: ## view final versions that will be used in a build for all direct and indirect dependencies

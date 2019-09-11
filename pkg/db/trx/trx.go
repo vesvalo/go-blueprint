@@ -9,7 +9,7 @@ import (
 type WithKeyTrx string
 
 const (
-	Prefix = "app.db.trx"
+	Prefix = "pkg.db.trx"
 	CtxKeyTrx = WithKeyTrx(Prefix)
 )
 

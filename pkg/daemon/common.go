@@ -1,7 +1,7 @@
 package daemon
 
 const (
-	Prefix           = "app.daemon"
+	Prefix           = "pkg.daemon"
 	UnmarshalKey     = "daemon"
 	UnmarshalKeyBind = "daemon.bind"
 )

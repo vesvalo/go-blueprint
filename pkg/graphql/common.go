@@ -1,6 +1,6 @@
 package graphql
 
 const (
-	Prefix       = "app.graphql"
+	Prefix       = "pkg.graphql"
 	UnmarshalKey = "graphql"
 )
